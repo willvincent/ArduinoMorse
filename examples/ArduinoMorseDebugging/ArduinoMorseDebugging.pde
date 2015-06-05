@@ -1,8 +1,9 @@
 #include <ArduinoMorse.h>
 
-ArduinoMorse morse(13); // LED on pin 13 will flash
+ArduinoMorse morse(13, Serial); // LED on pin 13 will flash
 
 void setup() {
+  Serial.begin(115200);
   delay(3000);
 }
 
