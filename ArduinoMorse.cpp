@@ -15,9 +15,21 @@
 ArduinoMorse::ArduinoMorse(int pin) {
   pinMode(pin, OUTPUT);
   _pin = pin;
+  _dbg = false;
+}
+
+ArduinoMorse::ArduinoMorse(int pin, Stream &dbgSerial) {
+  pinMode(pin, OUTPUT);
+  _pin = pin;
+  _dbg = true;
+  _dbgSerial = &dbgSerial;
+  _dbgSerial->print(' ');
 }
 
 void ArduinoMorse::dot() {
+  if (_dbg) {
+    _dbgSerial->print('.');
+  }
   digitalWrite(_pin, HIGH);
   delay(DOT);
   digitalWrite(_pin, LOW);
@@ -25,6 +37,9 @@ void ArduinoMorse::dot() {
 }
 
 void ArduinoMorse::dash() {
+  if (_dbg) {
+    _dbgSerial->print('-');
+  }
   digitalWrite(_pin, HIGH);
   delay(DASH);
   digitalWrite(_pin, LOW);
@@ -328,8 +343,14 @@ void ArduinoMorse::process(char* message) {
 	break;
       default:
         delay(WORD_BREAK);
+        if (_dbg) {
+          _dbgSerial->println();
+        }
         break;
     }
     delay(CHAR_BREAK);
+    if (_dbg) {
+      _dbgSerial->print(' ');
+    }
   }
 }
