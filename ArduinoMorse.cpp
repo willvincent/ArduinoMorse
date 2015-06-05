@@ -6,11 +6,11 @@
 #include "ArduinoMorse.h"
 #include <ctype.h>
 
-#define DOT 250          // Duration of a dot
-#define DASH 500         // Duration of a dash
-#define INNER_PAUSE 100  // Duration of pause between dot and dash in a character 
+#define DOT 75          // Duration of a dot
+#define DASH 375         // Duration of a dash
+#define INNER_PAUSE 250  // Duration of pause between dot and dash in a character 
 #define CHAR_BREAK 500   // Duration of pause between characters
-#define WORD_BREAK 1000  // Duration of pause between words (spaces, punctuation, etc)
+#define WORD_BREAK 750  // Duration of pause between words (spaces, punctuation, etc)
 
 ArduinoMorse::ArduinoMorse(int pin) {
   pinMode(pin, OUTPUT);
